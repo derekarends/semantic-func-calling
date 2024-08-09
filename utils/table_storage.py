@@ -25,13 +25,13 @@ class TableStorage:
     def create_table_if_not_exists(self):
         try:
           self.chat_history_client.create_table()  # type: ignore
-        except ResourceExistsError as e:
-          print(e)
+        except ResourceExistsError:
+          pass
 
         try:
           self.email_client.create_table()  # type: ignore
-        except ResourceExistsError as e:
-          print(e)
+        except ResourceExistsError:
+          pass
             
     def upsert_chat_history(self, chat_id: str, role: str, message: str):
         history_count = len(self.get_chat_history(chat_id))
